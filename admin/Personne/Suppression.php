@@ -5,6 +5,14 @@ session_start();
 if( $_SESSION["user"] == null){
     header("Location:../Login.php");
 }
+            $db = Database::connect();
+            $statement = $db->prepare("select * from admin where Email = ? ");
+            $statement->execute(array($_SESSION["user"]));
+            $item = $statement->fetch();
+            Database::disconnect();
+            if($item["access"] == 0){
+                header("Location:error.php");
+            }
 if(!empty($_GET['id'])){
     $id = checkInput($_GET['id']);   
 }

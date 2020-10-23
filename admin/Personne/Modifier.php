@@ -9,6 +9,15 @@
      if( $_SESSION["user"] == null){
         header("Location:../Login.php");
      }else{
+
+        $db = Database::connect();
+            $statement = $db->prepare("select * from admin where Email = ? ");
+            $statement->execute(array($_SESSION["user"]));
+            $item = $statement->fetch();
+            Database::disconnect();
+            if($item["access"] == 0){
+                header("Location:error.php");
+            }
         if(!empty($_GET['id'])){
             $id = $_GET['id'];  
         }
@@ -120,7 +129,6 @@
     <link href='http://fonts.googleapis.com/css?family=Holtwood+One+SC' rel='stylesheet' type="text/css">
 </head>
     <body>
-
         <div class="container admin" >
         <!-- <a href="../../index.php">
                 <img src="../../app/img/Logo_vertical.svg" class="LOGO" alt="logo">

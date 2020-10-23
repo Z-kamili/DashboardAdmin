@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 22, 2020 at 08:29 PM
+-- Generation Time: Oct 23, 2020 at 05:47 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -85,15 +85,18 @@ INSERT INTO `acceszonetemp` (`idAccesZT`, `raisonAccesZT`, `dateD_AccesZT`, `dat
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `Email` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(250) COLLATE utf8_unicode_ci NOT NULL
+  `password` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `access` tinyint(1) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`Email`, `password`) VALUES
-('admin99@gmail.com', 'Te$t2022');
+INSERT INTO `admin` (`Email`, `password`, `access`) VALUES
+('admin99@gmail.com', 'Te$t2022', 1),
+('Ahmed@gmail.com', '123456', 0),
+('Mohammed@gmail.com', '12345678', 0);
 
 -- --------------------------------------------------------
 
@@ -230,8 +233,8 @@ CREATE TABLE IF NOT EXISTS `personnel` (
 --
 
 INSERT INTO `personnel` (`idPersonnel`, `cinPersonnel`, `nomPersonnel`, `prenomPersonnel`, `telPersonnel`, `dateNaisPersonnel`, `departementPersonnel`, `macBracelet`, `pointsPersonnel`, `onlinePersonnel`) VALUES
-(1, 'FF953785', 'EL MERNISSI', 'Anouar', 663865410, '1982-02-04', 'dep_1', '66-68-7C-6B-58-8F', 1000, 1),
-(2, 'FK74333', 'AATIFF', 'Brahime', 664780929, '1976-10-11', 'dep_1', '7E-0E-95-27-13-3E', 2000, 1),
+(1, 'FF953785', 'EL MERNISSI', 'Anouar', 663865410, '1982-02-04', 'dep_1', '66-68-7C-6B-58-8F', 1003, 1),
+(2, 'FK74333', 'AATIFF', 'Brahime', 664780929, '1976-10-11', 'dep_1', '7E-0E-95-27-13-3E', 2002, 1),
 (3, 'H426165', 'MAROUANE', 'Abdelmotalib', 653325549, '1982-11-06', 'dep_1', '17-DE-36-70-58-A9', 1000, 0);
 
 -- --------------------------------------------------------
