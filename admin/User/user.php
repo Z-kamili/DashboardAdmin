@@ -87,7 +87,7 @@ $password = "";
             $statement->execute(array($_SESSION["user"]));
             $item = $statement->fetch();
             Database::disconnect();
-            if($item["roleUtilisateur"] == "admin"){
+            if($item["roleUtilisateur"] == "Super admin"){
               echo '<li><a href="#"  class="active">
               <span class="icon"><i class="fas fa-user"></i></span>
               <span class="title">User</span>

@@ -10,7 +10,7 @@ $statement = $db->prepare("select * from utilisateur where emailUtilisateur   = 
 $statement->execute(array($_SESSION["user"]));
 $item = $statement->fetch();
 Database::disconnect();
-if($item["roleUtilisateur"] != "admin"){
+if($item["roleUtilisateur"] != "Super admin"){
     header("Location:../Personne/error.php");
 }
 if(!empty($_GET['id'])){

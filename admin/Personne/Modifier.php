@@ -15,7 +15,7 @@
             $statement->execute(array($_SESSION["user"]));
             $item = $statement->fetch();
             Database::disconnect();
-            if($item["roleUtilisateur"] != "admin"){
+            if($item["roleUtilisateur"] != "admin" && $item["roleUtilisateur"] != "Super admin" ){
                 header("Location:error.php");
             }
         if(!empty($_GET['id'])){

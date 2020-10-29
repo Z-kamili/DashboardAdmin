@@ -14,7 +14,7 @@
         $statement->execute(array($_SESSION["user"]));
         $item = $statement->fetch();
         Database::disconnect();
-        if($item["roleUtilisateur"] != "admin"){
+        if($item["roleUtilisateur"] != "Super admin"){
             header("Location:../Personne/error.php");
         }
          if(!empty($_POST)){
@@ -99,6 +99,7 @@
                 <div class="form-group" enctype="multipart/form-data">
               <label>Online</label>
                 <select name="Role"  id="online" placeholder="online">
+                <option value="Super admin">Super admin </option>
                     <option value="admin">admin </option>
                     <option value="Sous admin">Sous admin</option>
                 </select>

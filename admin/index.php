@@ -54,7 +54,7 @@ if( $_SESSION["user"] == ""){
             $statement->execute(array($_SESSION["user"]));
             $item = $statement->fetch();
             Database::disconnect();
-            if($item["roleUtilisateur"] == "admin"){
+            if($item["roleUtilisateur"] == "Super admin"){
               echo '<li><a href="User/user.php">
               <span class="icon"><i class="fas fa-user"></i></span>
               <span class="title">User</span>
