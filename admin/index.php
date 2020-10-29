@@ -1,4 +1,5 @@
 <?php
+require '../Database/database.php';
 session_start();
 if( $_SESSION["user"] == ""){
     header("Location: Login.php");
@@ -46,6 +47,23 @@ if( $_SESSION["user"] == ""){
           <span class="icon"><i class="fas fa-address-card"></i></span>
           <span class="title">PATIENT</span>
           </a></li> -->
+          <?php
+          
+          $db = Database::connect();
+            $statement = $db->prepare("select * from utilisateur where emailUtilisateur   = ? ");
+            $statement->execute(array($_SESSION["user"]));
+            $item = $statement->fetch();
+            Database::disconnect();
+            if($item["roleUtilisateur"] == "admin"){
+              echo '<li><a href="User/user.php">
+              <span class="icon"><i class="fas fa-user"></i></span>
+              <span class="title">User</span>
+              </a></li>';
+            }
+          
+          
+          ?> 
+  
         <li><a href="#" >
           <span class="icon"><i class="fas fa-project-diagram"></i></span>
           <span class="title">MAINTENANCE</span>

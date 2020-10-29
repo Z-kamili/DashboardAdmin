@@ -7,13 +7,12 @@ if(!empty($_POST)){
   $email = checkInput($_POST["Email"]);
   $password = checkInput($_POST["pwd"]);
   $db = Database::connect();
-  $stmt = $db->query("SELECT Email,password FROM admin");
+  $stmt = $db->query("SELECT  emailUtilisateur,passUtilisateur FROM utilisateur");
   while ($row = $stmt->fetch()){
-    if($row['Email'] == $email && $row['password'] == $password){
+    if($row['emailUtilisateur'] == $email && $row['passUtilisateur'] == $password){
        session_start();
-       $_SESSION["user"] = $row['Email'];
-       $_SESSION["mtp"] = $row['password'];
-    //    $_SESSION["ID"] = $row['ID_ADMIN'];
+       $_SESSION["user"] = $row['emailUtilisateur'];
+       $_SESSION["mtp"] = $row['passUtilisateur'];
        header("Location: index.php");
     }else{
         $status = false;

@@ -10,11 +10,11 @@
         header("Location:../Login.php");
      }else{
         $db = Database::connect();
-        $statement = $db->prepare("select * from admin where Email = ? ");
+        $statement = $db->prepare("select * from utilisateur where emailUtilisateur   = ? ");
         $statement->execute(array($_SESSION["user"]));
         $item = $statement->fetch();
         Database::disconnect();
-        if($item["access"] == 0){
+        if($item["roleUtilisateur"] != "admin"){
             header("Location:error.php");
         }
          if(!empty($_POST)){

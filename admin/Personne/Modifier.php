@@ -11,11 +11,11 @@
      }else{
 
         $db = Database::connect();
-            $statement = $db->prepare("select * from admin where Email = ? ");
+            $statement = $db->prepare("select * from utilisateur where emailUtilisateur   = ? ");
             $statement->execute(array($_SESSION["user"]));
             $item = $statement->fetch();
             Database::disconnect();
-            if($item["access"] == 0){
+            if($item["roleUtilisateur"] != "admin"){
                 header("Location:error.php");
             }
         if(!empty($_GET['id'])){
@@ -216,8 +216,8 @@ echo '<option value="True">True</option>';
             
             <div class="form-actions">
             
-            <button type="submit" class="btn btn-success" > <span class="glyphicon glyphicon-pencil"></span>Modifier   </button>
-   <a class="btn btn-primary" href="personne.php"> <span class="glyphicon glyphicon-arrow-left"></span> Retour</a>            
+            <button type="submit" class="btn btn-success" > <span class="glyphicon glyphicon-pencil"></span>Modifier</button>
+            <a class="btn btn-primary" href="personne.php"> <span class="glyphicon glyphicon-arrow-left"></span>Retour</a>            
             </div>
                  </form>
                

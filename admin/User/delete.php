@@ -11,7 +11,7 @@ $statement->execute(array($_SESSION["user"]));
 $item = $statement->fetch();
 Database::disconnect();
 if($item["roleUtilisateur"] != "admin"){
-    header("Location:error.php");
+    header("Location:../Personne/error.php");
 }
 if(!empty($_GET['id'])){
     $id = checkInput($_GET['id']);   
@@ -19,10 +19,10 @@ if(!empty($_GET['id'])){
 if(!empty($_POST)){
   $id = checkInput($_POST['id']);
   $db = Database::connect();
-  $statement = $db->prepare("delete from personnel where idPersonnel = ?");
+  $statement = $db->prepare("delete from utilisateur where idUtilisateur = ?");
   $statement->execute(array($id));
   Database::disconnect();
-  header("Location:personne.php");  
+  header("Location:user.php");  
 }
 
 ?>
@@ -43,12 +43,12 @@ if(!empty($_POST)){
             <div class="row">
             <h1> <strong>Supprimer un Personnel</strong> </h1>
                 <br>
-              <form class="form" role="form" action="Suppression.php" method="post"  enctype="multipart/form-data">
+              <form class="form" role="form" action="delete.php" method="post"  enctype="multipart/form-data">
                   <p class="alert alert-warning">Etes vous de vouloir supprimer ?</p>
             <input type="hidden" name="id" value="<?php echo $id;?>"/>
         <div class="form-actions">
     <button type="submit" class="btn btn-success" > Oui   </button>
-   <a class="btn btn-primary" href="personne.php">Non</a>
+   <a class="btn btn-primary" href="user.php">Non</a>
             </div>
                 </form>
             </div>        

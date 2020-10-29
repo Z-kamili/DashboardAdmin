@@ -49,7 +49,7 @@ $password = "";
     </div>
     <div class="top_menu">
       <div class="logo"> </div>
-      <form class="form" role="form" name="search" action="personne.php" method="post">
+      <form class="form" role="form" name="search" action="user.php" method="post">
       <ul>
         <li>
          
@@ -64,7 +64,7 @@ $password = "";
         </a> 
       </button>
           </li>
-          <li><a href="personne.php"> 
+          <li><a href="user.php"> 
           <i class="fas fa-user"></i>
           </a></li>
       </ul>
@@ -77,25 +77,22 @@ $password = "";
         <li><a href="../index.php" >
           <span class="icon"><i class="fas fa-home"></i></span>
           <span class="title">ACCEUIL</span></a></li>
-        <li><a href="#" class="active">
+        <li><a href="../Personne/personne.php">
           <span class="icon"><i class="fas fa-user"></i></span>
           <span class="title">Management</span>
           </a></li>
            <?php
-          
           $db = Database::connect();
             $statement = $db->prepare("select * from utilisateur where emailUtilisateur   = ? ");
             $statement->execute(array($_SESSION["user"]));
             $item = $statement->fetch();
             Database::disconnect();
             if($item["roleUtilisateur"] == "admin"){
-              echo '<li><a href="../User/user.php">
+              echo '<li><a href="#"  class="active">
               <span class="icon"><i class="fas fa-user"></i></span>
               <span class="title">User</span>
               </a></li>';
             }
-          
-          
           ?> 
         <li><a href="#" >
           <span class="icon"><i class="fas fa-project-diagram"></i></span>
@@ -113,31 +110,19 @@ $password = "";
     <!-- <h1 class="title">Tbeb Lik</h1> -->
     <div class="container admin">
     <div>
-          <?php if($error == true) :?> 
-<div class="alert alert-danger" role="alert">
-la format n'est pas correct l'extenstion doit etre xlsx
-</div>
-<?php endif?>
         <div class="row">
             
         <h1>Listes Personnel</h1>
        
-          <a class="btn-main" href="Ajoute.php" id="Ajoute">Ajouter</a>  <br>
+          <a class="btn-main" href="AjouteUser.php" id="Ajoute">Ajouter</a>  <br>
  
           </div>
             <table class="table table-striped table-bordered">
   
             <thead>
                 <tr>
-                <th>CIN</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Telephone</th>
-                <th>Date Naissence</th>
-                <th>Departement</th>
-                <th>MacPersonnel</th>
-                <th>PointPersonnel</th>
-                <th>Online</th>
+                <th>Email</th>
+                <th>Role</th>
                 <th>Action</th>
                 </tr>
             </thead>
@@ -146,49 +131,31 @@ la format n'est pas correct l'extenstion doit etre xlsx
             <?php
             $db = Database::connect();
             if($status){
-              $statement = $db->prepare("select idPersonnel,cinPersonnel,nomPersonnel,prenomPersonnel,telPersonnel,dateNaisPersonnel,departementPersonnel,macBracelet,pointsPersonnel,onlinePersonnel from personnel where nomPersonnel = ? or cinPersonnel = ?  or prenomPersonnel = ? ");
-              $statement->execute(array($search,$search,$search));
+              $statement = $db->prepare("select * from personnel where emailUtilisateur = ?");
+              $statement->execute(array($search));
               while($item = $statement->fetch())
               {
-                echo      '<tr>';
-                echo    '<td>' . $item['cinPersonnel'] .  '</td>';
-                echo    '<td>' . $item['nomPersonnel'] .  '</td>';
-                echo    '<td>' . $item['prenomPersonnel'] .  '</td>';
-                echo    '<td>' . $item['telPersonnel'] .  '</td>'; 
-                echo    '<td>' . $item['dateNaisPersonnel'] .  '</td>';  
-                echo    '<td>' . $item['departementPersonnel'] .  '</td>'; 
-                echo    '<td>' . $item['macBracelet'] .  '</td>'; 
-                echo    '<td>' . $item['pointsPersonnel'] .  '</td>'; 
-                echo    '<td>' . $item['onlinePersonnel'] .  '</td>'; 
+                echo    '<tr>';
+                echo    '<td>' . $item['emailUtilisateur'] .  '</td>';
+                echo    '<td>' . $item['roleUtilisateur'] .  '</td>';
                 echo   '<td width="300">';
-                echo   '<a class="btn btn-primary" href="Modifier.php?id=' .$item['idPersonnel'] . '"><span class="glyphicon glyphicon-pencil"></span> Modifier </a>';
-                echo ' ';
-                echo     '<a class="btn btn-danger" href="Suppression.php?id=' .$item['idPersonnel'] . '"><span class="glyphicon glyphicon-remove"></span> delete </a>'; 
+                echo     '<a class="btn btn-danger" href="delete.php?id=' .$item['idUtilisateur'] . '"><span class="glyphicon glyphicon-remove"></span> delete </a>'; 
                 echo    '</td>';
                 
-                echo '</tr>'; 
+                echo '</tr>';    
                  
                   
               }
               }else{ 
-              $statement = $db->query("select idPersonnel,cinPersonnel,nomPersonnel,prenomPersonnel,telPersonnel,dateNaisPersonnel,departementPersonnel,macBracelet,pointsPersonnel,onlinePersonnel from personnel LIMIT 10 ");
+              $statement = $db->query("select * from utilisateur LIMIT 10 ");
               while($item = $statement->fetch())
               {
 
              echo      '<tr>';
-             echo    '<td>' . $item['cinPersonnel'] .  '</td>';
-             echo    '<td>' . $item['nomPersonnel'] .  '</td>';
-             echo    '<td>' . $item['prenomPersonnel'] .  '</td>';
-             echo    '<td>' . $item['telPersonnel'] .  '</td>'; 
-             echo    '<td>' . $item['dateNaisPersonnel'] .  '</td>';  
-             echo    '<td>' . $item['departementPersonnel'] .  '</td>'; 
-             echo    '<td>' . $item['macBracelet'] .  '</td>'; 
-             echo    '<td>' . $item['pointsPersonnel'] .  '</td>'; 
-             echo    '<td>' . $item['onlinePersonnel'] .  '</td>'; 
+             echo    '<td>' . $item['emailUtilisateur'] .  '</td>';
+             echo    '<td>' . $item['roleUtilisateur'] .  '</td>';
              echo   '<td width="300">';
-             echo   '<a class="btn btn-primary" href="Modifier.php?id=' .$item['idPersonnel'] . '"><span class="glyphicon glyphicon-pencil"></span> Modifier </a>';
-             echo ' ';
-             echo     '<a class="btn btn-danger" href="Suppression.php?id=' .$item['idPersonnel'] . '"><span class="glyphicon glyphicon-remove"></span> delete </a>'; 
+             echo     '<a class="btn btn-danger" href="delete.php?id=' .$item['idUtilisateur'] . '"><span class="glyphicon glyphicon-remove"></span> delete </a>'; 
              echo    '</td>';
              
              echo '</tr>';     

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 23, 2020 at 05:47 PM
+-- Generation Time: Oct 29, 2020 at 10:49 PM
 -- Server version: 10.4.10-MariaDB
 -- PHP Version: 7.3.12
 
@@ -75,28 +75,6 @@ CREATE TABLE IF NOT EXISTS `acceszonetemp` (
 
 INSERT INTO `acceszonetemp` (`idAccesZT`, `raisonAccesZT`, `dateD_AccesZT`, `dateF_AccesZT`, `idPersonnel`, `idZone`, `idUtilisateur`) VALUES
 (1, 'raison', '2020-10-13 20:00:00', '2020-10-13 22:00:00', 2, 3, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin`
---
-
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE IF NOT EXISTS `admin` (
-  `Email` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
-  `access` tinyint(1) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`Email`, `password`, `access`) VALUES
-('admin99@gmail.com', 'Te$t2022', 1),
-('Ahmed@gmail.com', '123456', 0),
-('Mohammed@gmail.com', '12345678', 0);
 
 -- --------------------------------------------------------
 
@@ -298,17 +276,19 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `emailUtilisateur` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `roleUtilisateur` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `passUtilisateur` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
-  `idPersonnel` int(11) NOT NULL,
+  `idPersonnel` int(11) DEFAULT NULL,
   PRIMARY KEY (`idUtilisateur`),
   KEY `fk_utilisateur_personnel` (`idPersonnel`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`idUtilisateur`, `emailUtilisateur`, `roleUtilisateur`, `passUtilisateur`, `idPersonnel`) VALUES
-(1, 'test@gmail.com', 'admin', 'azerty', 3);
+(1, 'test@gmail.com', 'admin', 'azerty', 3),
+(5, 'zakariakamili97@gmail.com', 'admin', 'azerty123456', NULL),
+(6, 'ouchad@gmail.com', 'Sous admin', 'azerty123', NULL);
 
 -- --------------------------------------------------------
 
